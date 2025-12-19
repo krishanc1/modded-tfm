@@ -248,6 +248,7 @@ export enum CardName {
   SPACE_ELEVATOR = 'Space Elevator',
   SPACE_PORT = 'Space Port',
   SPACE_PORT_COLONY = 'Space Port Colony',
+  SPACEWAYS = 'Spaceways',
   SPINOFF_DEPARTMENT = 'Spin-off Department',
   STRIP_MINE = 'Strip Mine',
   SUBTERRANEAN_RESERVOIR = 'Subterranean Reservoir',

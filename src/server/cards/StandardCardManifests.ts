@@ -50,6 +50,7 @@ import {Inventrix} from './corporation/Inventrix';
 import {MiningGuild} from './corporation/MiningGuild';
 import {PhoboLog} from './corporation/PhoboLog';
 import {SaturnSystems} from './corporation/SaturnSystems';
+import {Spaceways} from './corporation/Spaceways';
 import {Teractor} from './corporation/Teractor';
 import {TharsisRepublic} from './corporation/TharsisRepublic';
 import {Thorgate} from './corporation/Thorgate';
@@ -353,6 +354,7 @@ export const BASE_CARD_MANIFEST = new ModuleManifest({
     [CardName.SOLAR_WIND_POWER]: {Factory: SolarWindPower},
     [CardName.SOLETTA]: {Factory: Soletta},
     [CardName.SPACE_MIRRORS]: {Factory: SpaceMirrors},
+    [CardName.SPACEWAYS]: {Factory: Spaceways},
     [CardName.SPECIAL_DESIGN]: {Factory: SpecialDesign},
     [CardName.STEELWORKS]: {Factory: Steelworks},
     [CardName.STRIP_MINE]: {Factory: StripMine},

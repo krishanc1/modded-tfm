@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
 import {ActiveCorporationCard} from './CorporationCard';
 
 export class Aristarchus extends ActiveCorporationCard {

@@ -12,6 +12,11 @@ export class Aristarchus extends ActiveCorporationCard {
       tags: [Tag.VENUS, Tag.EARTH, Tag.JOVIAN],
       startingMegaCredits: 33,
 
+      action: {
+        spend: {megacredits: 0},
+        stock: {megacredits: 10},
+      },
+
       metadata: {
         cardNumber: 'R50',
         description: 'You start with 33 M€. Action: If you have exactly 0 M€, gain 10 M€.',
@@ -31,8 +36,8 @@ export class Aristarchus extends ActiveCorporationCard {
     return player.megaCredits === 0;
   }
 
-  public override bespokeAction(player: IPlayer) {
-    player.stock.add(Resource.MEGACREDITS, 10);
+  public override bespokeAction(_player: IPlayer) {
+    // The action behavior is already defined in the constructor
     return undefined;
   }
 }

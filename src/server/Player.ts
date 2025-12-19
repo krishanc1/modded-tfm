@@ -657,23 +657,24 @@ export class Player implements IPlayer {
     const cards = copyAndClear(this.draftedCards);
 
     const chooseCardsToBuy = () => {
-      // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
-      // It's because all players is drafting at the same time. Once again, the server isn't ideal
-      // when it comes to handling multiple players at once.
-      const action = new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
+  const action = new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
 
-      // ChooseCards.execute returns an action with an andThen set. That means
-      // this has to wrap it around and do clever things.
-      // Fortunately it's callback returns void, so this doesn't have to pass
-      // something back another PlayerInput.
-      const saved = action.cb;
-      action.cb = ((response) => {
-        saved(response);
-        this.game.playerIsFinishedWithResearchPhase(this);
-        return undefined;
-      });
-      return action;
-    };
+  const saved = action.cb;
+  action.cb = ((response) => {
+    saved(response);
+    
+    // Call Aerotech hook if player has it
+    const corp = this.pickedCorporationCard;
+    if (corp?.onCardsDealt !== undefined) {
+      const selectedCards = this.cardsInHand.filter((card) => cards.includes(card));
+      corp.onCardsDealt(this, cards, selectedCards);
+    }
+    
+    this.game.playerIsFinishedWithResearchPhase(this);
+    return undefined;
+  });
+  return action;
+};
 
     if (this.game.underworldDraftEnabled &&
       this.underworldData.corruption > 0 &&

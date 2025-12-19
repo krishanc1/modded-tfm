@@ -4,6 +4,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardType} from '../../../common/cards/CardType';
 import {Behavior} from '../../behavior/Behavior';
 import {SerializedCard} from '../../SerializedCard';
+import {IProjectCard} from '../IProjectCard';
 
 export interface ICorporationCard extends ICard {
   type: CardType.CORPORATION;
@@ -14,7 +15,7 @@ export interface ICorporationCard extends ICard {
   cardCost?: number;
   onCardPlayedForCorps?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
   onCardPlayed?: never;
-
+  onCardsDealt?(player: IPlayer, cards: Array<IProjectCard>, selected: Array<IProjectCard>): void;
   serialize?(serialized: SerializedCard): void;
   deserialize?(serialized: SerializedCard): void;
 }

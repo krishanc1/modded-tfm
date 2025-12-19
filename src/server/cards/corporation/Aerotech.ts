@@ -29,10 +29,12 @@ export class Aerotech extends CorporationCard {
     });
   }
 
-  public static onDrawCards(player: IPlayer, cards: IProjectCard[], selected: IProjectCard[]) {
-    if (player.game.phase === Phase.RESEARCH && player.pickedCorporationCard?.name === CardName.AEROTECH) {
-      player.stock.add(Resource.TITANIUM, cards.length - selected.length, {log: true});
+  public onCardsDealt(player: IPlayer, cards: Array<IProjectCard>, selected: Array<IProjectCard>): void {
+    if (player.game.phase === Phase.RESEARCH) {
+      const notBought = cards.length - selected.length;
+      if (notBought > 0) {
+        player.stock.add(Resource.TITANIUM, notBought, {log: true});
+      }
     }
-    return undefined;
   }
 }

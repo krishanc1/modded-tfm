@@ -5,6 +5,7 @@ import {AdaptedLichen} from './base/AdaptedLichen';
 import {AdvancedAlloys} from './base/AdvancedAlloys';
 import {AdvancedEcosystems} from './base/AdvancedEcosystems';
 import {AerobrakedAmmoniaAsteroid} from './base/AerobrakedAmmoniaAsteroid';
+import {Aerotech} from './corporation/Aerotech';
 import {AICentral} from './base/AICentral';
 import {Algae} from './base/Algae';
 import {AntiGravityTechnology} from './base/AntiGravityTechnology';
@@ -12,6 +13,7 @@ import {Ants} from './base/Ants';
 import {AquiferPumping} from './base/AquiferPumping';
 import {ArchaeBacteria} from './base/ArchaeBacteria';
 import {ArcticAlgae} from './base/ArcticAlgae';
+import {Aristarchus} from './corporation/Aristarchus';
 import {ArtificialLake} from './base/ArtificialLake';
 import {ArtificialPhotosynthesis} from './base/ArtificialPhotosynthesis';
 import {Asteroid} from './base/Asteroid';
@@ -19,6 +21,7 @@ import {AsteroidMining} from './base/AsteroidMining';
 import {AsteroidMiningConsortium} from './base/AsteroidMiningConsortium';
 import {BeamFromAThoriumAsteroid} from './base/BeamFromAThoriumAsteroid';
 import {BeginnerCorporation} from './corporation/BeginnerCorporation';
+import {Bentenmaru} from './corporation/Bentenmaru';
 import {BigAsteroid} from './base/BigAsteroid';
 import {BiomassCombustors} from './base/BiomassCombustors';
 import {Birds} from './base/Birds';
@@ -375,7 +378,10 @@ export const BASE_CARD_MANIFEST = new ModuleManifest({
     [CardName.ZEPPELINS]: {Factory: Zeppelins},
   },
   corporationCards: {
+    [CardName.AEROTECH]: {Factory: Aerotech},
+    [CardName.ARISTARCHUS]: {Factory: Aristarchus},
     [CardName.BEGINNER_CORPORATION]: {Factory: BeginnerCorporation},
+    [CardName.BENTENMARU]: {Factory: Bentenmaru},
     [CardName.CREDICOR]: {Factory: CrediCor},
     [CardName.ECOLINE]: {Factory: EcoLine},
     [CardName.HELION]: {Factory: Helion},

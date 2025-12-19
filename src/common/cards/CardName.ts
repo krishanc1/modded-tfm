@@ -343,7 +343,10 @@ export enum CardName {
   ZEPPELINS = 'Zeppelins',
 
   // Corps:
+  AEROTECH = 'Aerotech',
+  ARISTARCHUS = 'Aristarchus',
   BEGINNER_CORPORATION = 'Beginner Corporation',
+  BENTENMARU = 'Bentenmaru',
   CREDICOR = 'CrediCor',
   ECOLINE = 'EcoLine',
   HELION = 'Helion',

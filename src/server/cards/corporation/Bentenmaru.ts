@@ -10,16 +10,16 @@ export class Bentenmaru extends CorporationCard {
     super({
       name: CardName.BENTENMARU,
       tags: [Tag.SPACE],
-      startingMegaCredits: 25,
+      startingMegaCredits: 36,
 
       metadata: {
         cardNumber: 'R58',
-        description: 'You start with 25 M€ and 10 M€ production. When you take an action that would decrease an opponent\'s production or resources, increase YOUR production or resources by that amount instead. Each generation, when you pass, discard all your remaining M€.',
+        description: 'You start with 36 M€ and 10 M€ production. Each generation, when you pass, discard all your remaining M€.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(25).production((pb) => pb.megacredits(10));
+          b.megacredits(36).production((pb) => pb.megacredits(10));
           b.corpBox('effect', (ce) => {
-            ce.effect('When you take an action that would decrease an opponent\'s production or resources, increase YOUR production or resources by that amount instead. Each generation, when you pass, discard all your remaining M€.', (eb) => {
-              eb.empty().startEffect.text('See description');
+            ce.effect('Each generation, when you pass, discard all your remaining M€.', (eb) => {
+              eb.empty().startEffect.text('Lose all M€');
             });
           });
         }),
@@ -30,5 +30,13 @@ export class Bentenmaru extends CorporationCard {
   public override play(player: IPlayer) {
     player.production.add(Resource.MEGACREDITS, 10);
     return undefined;
+  }
+
+  public onPass(player: IPlayer): void {
+    // Discard all remaining megacredits when passing
+    const megacredits = player.megaCredits;
+    if (megacredits > 0) {
+      player.stock.deduct(Resource.MEGACREDITS, megacredits, {log: true});
+    }
   }
 }

@@ -1114,11 +1114,17 @@ export class Player implements IPlayer {
   }
 
   public pass(): void {
-    this.game.playerHasPassed(this);
-    this.lastCardPlayed = undefined;
-    this.autopass = false;
-    this.game.log('${0} passed', (b) => b.player(this));
+  // Call Bentenmaru hook if player has it
+  const corp = this.pickedCorporationCard;
+  if (corp?.onPass !== undefined) {
+    corp.onPass(this);
   }
+  
+  this.game.playerHasPassed(this);
+  this.lastCardPlayed = undefined;
+  this.autopass = false;
+  this.game.log('${0} passed', (b) => b.player(this));
+}
 
   private passOption(): PlayerInput {
     const option = new SelectOption('Pass for this generation', 'Pass').andThen(() => {

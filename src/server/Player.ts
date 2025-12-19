@@ -656,20 +656,18 @@ export class Player implements IPlayer {
 
     const cards = copyAndClear(this.draftedCards);
 
-    const chooseCardsToBuy = () => {
+ const chooseCardsToBuy = () => {
   const action = new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
 
   const saved = action.cb;
   action.cb = ((response) => {
-    saved(response);
-    
-    // Call Aerotech hook if player has it
+    // Call Aerotech hook with the selected cards
     const corp = this.pickedCorporationCard;
     if (corp?.onCardsDealt !== undefined) {
-      const selectedCards = this.cardsInHand.filter((card) => cards.includes(card));
-      corp.onCardsDealt(this, cards, selectedCards);
+      corp.onCardsDealt(this, cards, Array.from(response));
     }
     
+    saved(response);
     this.game.playerIsFinishedWithResearchPhase(this);
     return undefined;
   });

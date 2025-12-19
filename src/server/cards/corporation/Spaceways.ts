@@ -2,7 +2,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CorporationCard} from './CorporationCard';
@@ -37,14 +37,25 @@ export class Spaceways extends CorporationCard {
     return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
-      const corpOwner = player.game.getCardPlayerOrThrow(this.name);
-      corpOwner.stock.add(Resource.MEGACREDITS, 2, {log: true});
-
-      if (player.id === corpOwner.id) {
-        corpOwner.production.add(Resource.MEGACREDITS, 1, {log: true});
-      }
+  public onCardPlayedByAnyPlayer(thisCardOwner: IPlayer, card: ICard) {
+    if (card.type !== CardType.EVENT || !card.tags.includes(Tag.SPACE)) {
+      return undefined;
     }
+
+    // Any player plays a Space Event -> Spaceways owner gets 2 M€
+    thisCardOwner.stock.add(Resource.MEGACREDITS, 2, {log: true});
+
+    return undefined;
+  }
+
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.type !== CardType.EVENT || !card.tags.includes(Tag.SPACE)) {
+      return undefined;
+    }
+
+    // When the Spaceways owner plays a Space Event -> increase M€ production
+    player.production.add(Resource.MEGACREDITS, 1, {log: true});
+
+    return undefined;
   }
 }
